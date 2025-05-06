@@ -1,0 +1,49 @@
+services:
+  app-server:
+    build: 
+      context: ./backend
+    container_name: backend
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      - PORT=${PORT}
+      - MONGO_URL=mongodb://mongodb:27017/chaicode
+      - REDIS_USERNAME=default
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_HOST=redisdb
+      - REDIS_PORT=6379
+      - FRONTEND_URL=http://localhost:5173
+    depends_on:
+      - mongodb
+      - redisdb
+    
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - my_db:/data/db
+      
+
+  redisdb:
+    image: redis
+    container_name: redisdb
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+
+
+  app-frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_BACKEND_URL=http://localhost:${PORT}
+    depends_on:
+      - app-server
+volumes:
+  my_db: {}  
