@@ -41,6 +41,7 @@ The application environment variables are stored in a `.env` file. You can find 
 ```bash
 git clone https://github.com/ManasaNagaram/chai-aur-devops
 cd chai-aur-devops
+## create .env file 
 ```
 ### 2. Start All Services with Docker Compose
 
