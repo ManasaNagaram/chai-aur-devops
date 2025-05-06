@@ -1,8 +1,11 @@
-FROM node
+FROM node:18
 
-WORKDIR Backend
-COPY . .
+WORKDIR /backend
+
+COPY package*.json ./
 RUN npm i
+
+COPY . .
 
 EXPOSE 8080
 
