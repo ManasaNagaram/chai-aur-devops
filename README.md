@@ -30,3 +30,34 @@ The application environment variables are stored in a `.env` file. You can find 
 ### API Response Caching
 
 ![Screenshot 3](./screenshots/Three.png)
+
+
+---
+
+
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/ManasaNagaram/chai-aur-devops
+cd chai-aur-devops
+```
+### 2. Start All Services with Docker Compose
+
+```bash
+docker-compose up -d
+```
+or pass environment variables
+```bash
+$env:PORT="8000"
+$env:REDIS_PASSWORD="mypass"
+docker-compose up -d
+```
+3. Seed MongoDB with Initial Data
+```bash
+docker exec -it backend node seed.js
+```
+Access app at:
+
+http://localhost:5173
+
